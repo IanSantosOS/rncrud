@@ -1,15 +1,23 @@
+import { useContext } from 'react';
 import { View, FlatList, Alert } from 'react-native';
 import { ListItem, Avatar, Button, Icon } from '@rneui/themed';
-import users from '../data/users'
+import UsersContext from '../context/UsersContext'
 
 export default (props) => {
+
+    const { state, dispatch } = useContext(UsersContext);
 
     const confirmUserDeletion = (user) => {
         Alert.alert('Excluir Usário', 'Deseja Excluir o usuário?', [
             {
                 text: 'sim',
                 onPress() {
-                    console.warn("delete");
+                    // console.warn("delete");
+                    dispatch({
+                        type: 'deleteUser',
+                        payload: user,
+                        
+                    })
                 }
             },
             { text: 'Não' }
@@ -59,7 +67,7 @@ export default (props) => {
     return (
         <View>
             <FlatList
-                data={users}
+                data={state.users}
                 renderItem={getUserItem}
                 keyExtractor={user => `${user.id}`}
             />
