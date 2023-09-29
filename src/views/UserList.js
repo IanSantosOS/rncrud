@@ -16,7 +16,6 @@ export default (props) => {
                     dispatch({
                         type: 'deleteUser',
                         payload: user,
-                        
                     })
                 }
             },
